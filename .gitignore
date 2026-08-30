@@ -1,0 +1,9 @@
+credentials/
+dbt_project/target/
+dbt_project/logs/
+dbt_project/dbt_packages/
+.env
+.DS_Store
+__pycache__/
+.vscode/
+.user.yml
