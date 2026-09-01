@@ -1,0 +1,21 @@
+# Credentials come from .env, which docker-compose passes into the
+# Airflow containers. Nothing sensitive is stored in this file.
+usgs_earthquake:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+
+      # Default dataset. Models override this through +schema.
+      dataset: silver
+
+      # Must match the location used when the datasets were created,
+      # otherwise cross dataset queries fail.
+      location: asia-southeast2
+
+      threads: 4
+      timeout_seconds: 600
+      priority: interactive

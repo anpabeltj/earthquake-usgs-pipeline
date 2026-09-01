@@ -1,0 +1,33 @@
+name: 'usgs_earthquake'
+version: '1.0.0'
+config-version: 2
+
+profile: 'usgs_earthquake'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  usgs_earthquake:
+    silver:
+      +materialized: table
+      +schema: silver
+    gold:
+      +materialized: table
+      +schema: gold
+
+seeds:
+  usgs_earthquake:
+    +schema: silver
+    seed_region_country:
+      +column_types:
+        region: string
+        country: string
+        continent: string
