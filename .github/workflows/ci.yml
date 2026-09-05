@@ -1,0 +1,67 @@
+name: CI
+
+# Runs on every push and pull request. Nothing here touches BigQuery,
+# so no credentials are needed and none are stored in this repository.
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install \
+            apache-airflow==2.10.5 \
+            dbt-core==1.8.7 \
+            dbt-bigquery==1.8.3 \
+            requests==2.32.3 \
+            country_converter==1.2 \
+            pycountry==24.6.1
+
+      - name: Compile every Python file
+        # Catches syntax errors in scripts that nothing imports at
+        # parse time, which the DAG check below would miss.
+        run: python -m compileall -q dags src scripts app
+
+      - name: Import every DAG
+        # The DAG files import from src/, so that has to be on the path
+        # the same way PYTHONPATH puts it there in the container.
+        #
+        # This is the check that would have caught the missing
+        # backfill_has_reached_start import, which otherwise only
+        # surfaced as a broken DAG in the Airflow UI after a restart.
+        env:
+          PYTHONPATH: src
+          AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+        run: |
+          for dag in dags/*.py; do
+            echo "importing $dag"
+            python -c "
+          import importlib.util, sys
+          spec = importlib.util.spec_from_file_location('dag_under_test', '$dag')
+          module = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(module)
+          "
+          done
+
+      - name: Parse the dbt project
+        # dbt parse resolves every ref() and source() and compiles the
+        # Jinja, without connecting to BigQuery. A model referencing a
+        # source that was never declared fails here, which is the error
+        # that appeared twice while adding new sources.
+        working-directory: dbt_project
+        env:
+          GCP_PROJECT_ID: ci-placeholder
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/not-a-real-key.json
+        run: |
+          dbt deps
+          dbt parse
