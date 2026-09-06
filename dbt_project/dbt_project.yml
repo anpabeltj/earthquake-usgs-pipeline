@@ -1,8 +1,8 @@
-name: 'usgs_earthquake'
-version: '1.0.0'
+name: "usgs_earthquake"
+version: "1.0.0"
 config-version: 2
 
-profile: 'usgs_earthquake'
+profile: "usgs_earthquake"
 
 model-paths: ["models"]
 seed-paths: ["seeds"]
@@ -30,4 +30,5 @@ seeds:
       +column_types:
         region: string
         country: string
+        iso3: string
         continent: string

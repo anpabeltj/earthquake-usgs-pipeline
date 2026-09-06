@@ -1,0 +1,84 @@
+version: 2
+
+models:
+
+  - name: silver_usgs_cleaned
+    description: >
+      One row per event, cast from epoch milliseconds and deduplicated
+      by keeping the newest revision of each usgs_id.
+    columns:
+      - name: usgs_id
+        data_tests: [not_null, unique]
+      - name: event_time
+        data_tests: [not_null]
+      - name: updated_at
+        data_tests: [not_null]
+      - name: magnitude
+        data_tests: [not_null]
+      - name: depth_km
+        data_tests: [not_null]
+      - name: latitude
+        data_tests: [not_null]
+      - name: longitude
+        data_tests: [not_null]
+      - name: event_type
+        description: Filtered to earthquake only in gold.
+        data_tests: [not_null]
+
+  - name: silver_usgs_location
+    description: Parsed place field, one row per event.
+    columns:
+      - name: usgs_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('silver_usgs_cleaned')
+              field: usgs_id
+      - name: region_raw
+        description: >
+          Never null. Ocean events have no comma in the place field, so
+          the whole string becomes the region.
+        data_tests: [not_null]
+      - name: country
+        description: >
+          Null for events in international waters, where USGS names the
+          seismic region rather than a country. Also null if a country
+          name appears that the seed does not carry.
+
+  - name: silver_usgs_category
+    description: Magnitude, depth, and alert bands, one row per event.
+    columns:
+      - name: usgs_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('silver_usgs_cleaned')
+              field: usgs_id
+      - name: magnitude_category
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Minor', 'Light', 'Moderate', 'Strong', 'Major']
+      - name: depth_category
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Shallow', 'Intermediate', 'Deep']
+      - name: alert_level
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['green', 'yellow', 'orange', 'red', 'none']
+
+seeds:
+  - name: seed_region_country
+    description: Maps a region name to its country and continent.
+    columns:
+      - name: region
+        data_tests: [not_null, unique]
+      - name: country
+        data_tests: [not_null]
+      - name: continent
+        data_tests: [not_null]

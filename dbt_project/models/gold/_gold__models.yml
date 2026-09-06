@@ -1,0 +1,214 @@
+version: 2
+
+models:
+  - name: gold_dim_time
+    description: One row per distinct event timestamp, broken into date parts.
+    columns:
+      - name: time_id
+        data_tests: [not_null, unique]
+      - name: date
+        data_tests: [not_null]
+      - name: year
+        data_tests: [not_null]
+
+  - name: gold_dim_location
+    description: >
+      One row per distinct place and region combination. Coordinates
+      live in the fact table, since they are unique per event.
+
+      Grouped on lowercased values, because USGS capitalises the same
+      region name inconsistently and keying on the raw text would split
+      one place across two rows.
+    columns:
+      - name: location_id
+        data_tests: [not_null, unique]
+      - name: region
+        description: Country for most events, US state inside the United States.
+      - name: continent
+        description: Null when the region is missing from the seed.
+
+  - name: gold_dim_magnitude_category
+    description: Fixed set of magnitude bands.
+    columns:
+      - name: magnitude_category_id
+        data_tests: [not_null, unique]
+      - name: magnitude_category
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ["Minor", "Light", "Moderate", "Strong", "Major"]
+
+  - name: gold_dim_depth_category
+    description: Fixed set of depth bands.
+    columns:
+      - name: depth_category_id
+        data_tests: [not_null, unique]
+      - name: depth_category
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ["Shallow", "Intermediate", "Deep"]
+
+  - name: gold_dim_magnitude_type
+    description: >
+      Magnitude scales observed in the catalog, plus an unknown member
+      for events with no magnitude type recorded.
+    columns:
+      - name: magnitude_type_id
+        data_tests: [not_null, unique]
+      - name: magnitude_type
+        data_tests: [not_null]
+
+  - name: gold_dim_alert_level
+    description: >
+      PAGER impact levels, plus a none member for events PAGER never
+      assessed.
+    columns:
+      - name: alert_level_id
+        data_tests: [not_null, unique]
+      - name: alert_level
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ["green", "yellow", "orange", "red", "none"]
+
+  - name: gold_dim_network
+    description: >
+      Reporting networks observed in the catalog, plus an unknown member
+      for events with no network recorded.
+    columns:
+      - name: network_id
+        data_tests: [not_null, unique]
+      - name: network
+        data_tests: [not_null]
+
+  - name: gold_fact_earthquake
+    description: >
+      One row per tectonic earthquake, with foreign keys to every
+      dimension and the numeric measures alongside.
+    columns:
+      - name: usgs_id
+        data_tests: [not_null, unique]
+      - name: time_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_time')
+              field: time_id
+      - name: event_time
+        description: Exact event timestamp from USGS, UTC.
+        data_tests: [not_null]
+      - name: location_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_location')
+              field: location_id
+      - name: magnitude_category_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_magnitude_category')
+              field: magnitude_category_id
+      - name: depth_category_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_depth_category')
+              field: depth_category_id
+      - name: magnitude_type_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_magnitude_type')
+              field: magnitude_type_id
+      - name: alert_level_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_alert_level')
+              field: alert_level_id
+      - name: network_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('gold_dim_network')
+              field: network_id
+      - name: magnitude
+        data_tests: [not_null]
+      - name: depth_km
+        data_tests: [not_null]
+      - name: latitude
+        data_tests: [not_null]
+      - name: longitude
+        data_tests: [not_null]
+      - name: event_date
+        description: Partition key, derived from the event timestamp.
+        data_tests: [not_null]
+      - name: tsunami_flag
+        data_tests:
+          - accepted_values:
+              values: [0, 1]
+              quote: false
+
+  - name: gold_earthquake_impact
+    description: >
+      One row per NCEI significant earthquake, with recorded deaths,
+      injuries and damage, and a link to the matching USGS event where
+      one was found. About 94% of events match; usgs_id is null for the
+      rest rather than the row being dropped.
+    columns:
+      - name: ncei_id
+        data_tests: [not_null, unique]
+      - name: usgs_id
+        description: >
+          Matched USGS event, null when no event fell within 120 seconds
+          and 50 km. Not tested for relationships, since a null is a
+          legitimate outcome here.
+      - name: event_time
+        data_tests: [not_null]
+      - name: event_date
+        data_tests: [not_null]
+      - name: eq_magnitude
+        description: >
+          Primary magnitude as recorded by NCEI. Null for three events
+          in the 2000 onward window, which NCEI included on the strength
+          of their damage rather than a measured size.
+      - name: deaths
+        description: Deaths including secondary effects. Present for about 41% of events.
+      - name: damage_millions_dollars
+        description: Damage in millions of US dollars. Present for about 18% of events.
+      - name: match_distance_km
+        description: Distance between the two catalogues' epicentres, kilometres.
+      - name: magnitude_diff
+        description: >
+          Absolute difference between the NCEI and USGS magnitudes. A
+          large value on an otherwise close match suggests the pair may
+          be wrong. 12 of 1,386 matches exceed 0.5.
+
+  - name: gold_country_impact
+    description: >
+      Recorded earthquake impact per country per year, with population
+      alongside. Covers only NCEI events, meaning damaging earthquakes,
+      not the full USGS catalog.
+    columns:
+      - name: iso3
+        data_tests: [not_null]
+      - name: year
+        data_tests: [not_null]
+      - name: events
+        data_tests: [not_null]
+      - name: events_with_deaths
+        description: How many of the events in this country year carry a death count.
+        data_tests: [not_null]
+      - name: deaths_per_million
+        description: >
+          Deaths divided by population, per million residents. Null
+          when the country year has no death figure at all.
+      - name: population_estimated
+        description: True when population fell back to a later year's figure.
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]
+              quote: false

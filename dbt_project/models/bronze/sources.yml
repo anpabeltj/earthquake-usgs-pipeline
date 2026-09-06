@@ -1,0 +1,70 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: >
+      Raw USGS catalog events. Append only, so a revised event appears
+      more than once with different updated timestamps.
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    schema: bronze
+
+    tables:
+      - name: bronze_usgs_earthquake
+        description: Events from the USGS FDSN event query service
+        loaded_at_field: _ingested_at
+        freshness:
+          warn_after: { count: 3, period: hour }
+          error_after: { count: 12, period: hour }
+        columns:
+          - name: usgs_id
+            description: Unique event id assigned by USGS
+          - name: place
+            description: >
+              Free text description. Three shapes appear: distance plus
+              direction plus place plus region, region alone for ocean
+              events, and occasionally place without a region.
+          - name: updated_ms
+            description: >
+              Revision timestamp. Higher means newer, which is how
+              silver picks the winning copy of a duplicated event.
+          - name: event_type
+            description: >
+              Not every catalog entry is a tectonic earthquake. Quarry
+              blasts, explosions, and ice quakes are filtered out in gold.
+      - name: bronze_worldbank_population
+        description: >
+          Raw World Bank population indicator (SP.POP.TOTL), one row per
+          country per year. Append only, refetched in full each run
+          because the World Bank revises past years.
+        loaded_at_field: _ingested_at
+        freshness:
+          warn_after: { count: 40, period: day }
+          error_after: { count: 90, period: day }
+        columns:
+          - name: iso3
+            description: ISO 3166-1 alpha-3 code, the join key to the region seed.
+          - name: year
+            description: Observation year.
+          - name: population
+            description: Total population, null when not yet published.
+
+      - name: bronze_ncei_earthquake
+        description: >
+          Raw NCEI/WDS Global Significant Earthquake Database records.
+          Damaging events only, around 1,472 in the 2000 onward window
+          against 186 thousand in the USGS catalog. Append only,
+          refetched in full each run because NCEI revises death tolls
+          and damage figures as reports come in.
+        loaded_at_field: _ingested_at
+        freshness:
+          warn_after: { count: 40, period: day }
+          error_after: { count: 90, period: day }
+        columns:
+          - name: ncei_id
+            description: NCEI event id, unique per event.
+          - name: country
+            description: Country as written by NCEI, uppercase, its own naming.
+          - name: deaths_total
+            description: Deaths including secondary effects such as tsunami.
+          - name: damage_millions_dollars_total
+            description: Damage in millions of US dollars, present for about 18% of rows.

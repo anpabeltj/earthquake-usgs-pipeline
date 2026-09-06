@@ -1,0 +1,368 @@
+region,country,iso3,continent
+AK,United States,USA,America
+AL,United States,USA,America
+AR,United States,USA,America
+AS,United States,USA,America
+AZ,United States,USA,America
+Afghanistan,Afghanistan,AFG,Asia
+Alabama,United States,USA,America
+Aland Islands,Aland Islands,ALA,Europe
+Alaska,United States,USA,America
+Albania,Albania,ALB,Europe
+Algeria,Algeria,DZA,Africa
+American Samoa,United States,USA,America
+Andorra,Andorra,AND,Europe
+Angola,Angola,AGO,Africa
+Anguilla,Anguilla,AIA,America
+Antarctica,Antarctica,ATA,Antarctica
+Antigua and Barbuda,Antigua and Barbuda,ATG,America
+Argentina,Argentina,ARG,America
+Arizona,United States,USA,America
+Arkansas,United States,USA,America
+Armenia,Armenia,ARM,Asia
+Aruba,Aruba,ABW,America
+Australia,Australia,AUS,Oceania
+Austria,Austria,AUT,Europe
+Azerbaijan,Azerbaijan,AZE,Asia
+BOSNIA-HERZEGOVINA,Bosnia and Herzegovina,BIH,Europe
+Bahamas,Bahamas,BHS,America
+Bahrain,Bahrain,BHR,Asia
+Bangladesh,Bangladesh,BGD,Asia
+Barbados,Barbados,BRB,America
+Belarus,Belarus,BLR,Europe
+Belgium,Belgium,BEL,Europe
+Belize,Belize,BLZ,America
+Benin,Benin,BEN,Africa
+Bermuda,Bermuda,BMU,America
+Bhutan,Bhutan,BTN,Asia
+Bolivia,Bolivia,BOL,America
+"Bonaire, Saint Eustatius and Saba","Bonaire, Saint Eustatius and Saba",BES,America
+Bosnia and Herzegovina,Bosnia and Herzegovina,BIH,Europe
+Botswana,Botswana,BWA,Africa
+Bouvet Island,Bouvet Island,BVT,Antarctica
+Brazil,Brazil,BRA,America
+British Indian Ocean Territory,British Indian Ocean Territory,IOT,Africa
+British Virgin Islands,British Virgin Islands,VGB,America
+Brunei Darussalam,Brunei Darussalam,BRN,Asia
+Bulgaria,Bulgaria,BGR,Europe
+Burkina Faso,Burkina Faso,BFA,Africa
+Burundi,Burundi,BDI,Africa
+CA,United States,USA,America
+CO,United States,USA,America
+CT,United States,USA,America
+CZECH REPUBLIC,Czechia,CZE,Europe
+Cabo Verde,Cabo Verde,CPV,Africa
+California,United States,USA,America
+Cambodia,Cambodia,KHM,Asia
+Cameroon,Cameroon,CMR,Africa
+Canada,Canada,CAN,America
+Cayman Islands,Cayman Islands,CYM,America
+Central African Republic,Central African Republic,CAF,Africa
+Chad,Chad,TCD,Africa
+Chile,Chile,CHL,America
+China,China,CHN,Asia
+Christmas Island,Christmas Island,CXR,Asia
+Cocos (Keeling) Islands,Cocos (Keeling) Islands,CCK,Asia
+Colombia,Colombia,COL,America
+Colorado,United States,USA,America
+Comoros,Comoros,COM,Africa
+Congo Republic,Congo Republic,COG,Africa
+Connecticut,United States,USA,America
+Cook Islands,Cook Islands,COK,Oceania
+Costa Rica,Costa Rica,CRI,America
+Cote d'Ivoire,Cote d'Ivoire,CIV,Africa
+Croatia,Croatia,HRV,Europe
+Cuba,Cuba,CUB,America
+Curacao,Curacao,CUW,America
+Cyprus,Cyprus,CYP,Asia
+Czechia,Czechia,CZE,Europe
+DC,United States,USA,America
+DE,United States,USA,America
+DR Congo,DR Congo,COD,Africa
+Delaware,United States,USA,America
+Denmark,Denmark,DNK,Europe
+District of Columbia,United States,USA,America
+Djibouti,Djibouti,DJI,Africa
+Dominica,Dominica,DMA,America
+Dominican Republic,Dominican Republic,DOM,America
+Ecuador,Ecuador,ECU,America
+Egypt,Egypt,EGY,Africa
+El Salvador,El Salvador,SLV,America
+Equatorial Guinea,Equatorial Guinea,GNQ,Africa
+Eritrea,Eritrea,ERI,Africa
+Estonia,Estonia,EST,Europe
+Eswatini,Eswatini,SWZ,Africa
+Ethiopia,Ethiopia,ETH,Africa
+FL,United States,USA,America
+Falkland Islands,Falkland Islands,FLK,America
+Faroe Islands,Faroe Islands,FRO,Europe
+Fiji,Fiji,FJI,Oceania
+Finland,Finland,FIN,Europe
+Florida,United States,USA,America
+France,France,FRA,Europe
+French Guiana,French Guiana,GUF,America
+French Polynesia,French Polynesia,PYF,Oceania
+French Southern Territories,French Southern Territories,ATF,Africa
+GA,United States,USA,America
+GU,United States,USA,America
+Gabon,Gabon,GAB,Africa
+Gambia,Gambia,GMB,Africa
+Georgia,United States,USA,America
+Germany,Germany,DEU,Europe
+Ghana,Ghana,GHA,Africa
+Gibraltar,Gibraltar,GIB,Europe
+Greece,Greece,GRC,Europe
+Greenland,Greenland,GRL,America
+Grenada,Grenada,GRD,America
+Guadeloupe,Guadeloupe,GLP,America
+Guam,United States,USA,America
+Guatemala,Guatemala,GTM,America
+Guernsey,Guernsey,GGY,Europe
+Guinea,Guinea,GIN,Africa
+Guinea-Bissau,Guinea-Bissau,GNB,Africa
+Guyana,Guyana,GUY,America
+HI,United States,USA,America
+Haiti,Haiti,HTI,America
+Hawaii,United States,USA,America
+Heard and McDonald Islands,Heard and McDonald Islands,HMD,Antarctica
+Honduras,Honduras,HND,America
+Hong Kong,Hong Kong,HKG,Asia
+Hungary,Hungary,HUN,Europe
+IA,United States,USA,America
+ID,United States,USA,America
+IL,United States,USA,America
+IN,United States,USA,America
+Iceland,Iceland,ISL,Europe
+Idaho,United States,USA,America
+Illinois,United States,USA,America
+India,India,IND,Asia
+Indiana,United States,USA,America
+Indonesia,Indonesia,IDN,Asia
+Iowa,United States,USA,America
+Iran,Iran,IRN,Asia
+Iraq,Iraq,IRQ,Asia
+Ireland,Ireland,IRL,Europe
+Isle of Man,Isle of Man,IMN,Europe
+Israel,Israel,ISR,Asia
+Italy,Italy,ITA,Europe
+Jamaica,Jamaica,JAM,America
+Japan,Japan,JPN,Asia
+Jersey,Jersey,JEY,Europe
+Jordan,Jordan,JOR,Asia
+KS,United States,USA,America
+KY,United States,USA,America
+KYRGYZSTAN,Kyrgyz Republic,KGZ,Asia
+Kansas,United States,USA,America
+Kazakhstan,Kazakhstan,KAZ,Asia
+Kentucky,United States,USA,America
+Kenya,Kenya,KEN,Africa
+Kiribati,Kiribati,KIR,Oceania
+Kosovo,Kosovo,XKX,Europe
+Kuwait,Kuwait,KWT,Asia
+Kyrgyz Republic,Kyrgyz Republic,KGZ,Asia
+LA,United States,USA,America
+Laos,Laos,LAO,Asia
+Latvia,Latvia,LVA,Europe
+Lebanon,Lebanon,LBN,Asia
+Lesotho,Lesotho,LSO,Africa
+Liberia,Liberia,LBR,Africa
+Libya,Libya,LBY,Africa
+Liechtenstein,Liechtenstein,LIE,Europe
+Lithuania,Lithuania,LTU,Europe
+Louisiana,United States,USA,America
+Luxembourg,Luxembourg,LUX,Europe
+MA,United States,USA,America
+MD,United States,USA,America
+ME,United States,USA,America
+MI,United States,USA,America
+MN,United States,USA,America
+MO,United States,USA,America
+MP,United States,USA,America
+MS,United States,USA,America
+MT,United States,USA,America
+MYANMAR (BURMA),Myanmar,MMR,Asia
+Macau,Macau,MAC,Asia
+Madagascar,Madagascar,MDG,Africa
+Maine,United States,USA,America
+Malawi,Malawi,MWI,Africa
+Malaysia,Malaysia,MYS,Asia
+Maldives,Maldives,MDV,Asia
+Mali,Mali,MLI,Africa
+Malta,Malta,MLT,Europe
+Marshall Islands,Marshall Islands,MHL,Oceania
+Martinique,Martinique,MTQ,America
+Maryland,United States,USA,America
+Massachusetts,United States,USA,America
+Mauritania,Mauritania,MRT,Africa
+Mauritius,Mauritius,MUS,Africa
+Mayotte,Mayotte,MYT,Africa
+Mexico,Mexico,MEX,America
+Michigan,United States,USA,America
+Micronesia,"Micronesia, Fed. Sts.",FSM,Oceania
+"Micronesia, Fed. Sts.","Micronesia, Fed. Sts.",FSM,Oceania
+Minnesota,United States,USA,America
+Mississippi,United States,USA,America
+Missouri,United States,USA,America
+Moldova,Moldova,MDA,Europe
+Monaco,Monaco,MCO,Europe
+Mongolia,Mongolia,MNG,Asia
+Montana,United States,USA,America
+Montenegro,Montenegro,MNE,Europe
+Montserrat,Montserrat,MSR,America
+Morocco,Morocco,MAR,Africa
+Mozambique,Mozambique,MOZ,Africa
+Myanmar,Myanmar,MMR,Asia
+NC,United States,USA,America
+ND,United States,USA,America
+NE,United States,USA,America
+NH,United States,USA,America
+NJ,United States,USA,America
+NM,United States,USA,America
+NV,United States,USA,America
+NY,United States,USA,America
+Namibia,Namibia,NAM,Africa
+Nauru,Nauru,NRU,Oceania
+Nebraska,United States,USA,America
+Nepal,Nepal,NPL,Asia
+Netherlands,Netherlands,NLD,Europe
+Nevada,United States,USA,America
+New Caledonia,New Caledonia,NCL,Oceania
+New Hampshire,United States,USA,America
+New Jersey,United States,USA,America
+New Mexico,United States,USA,America
+New York,United States,USA,America
+New Zealand,New Zealand,NZL,Oceania
+Nicaragua,Nicaragua,NIC,America
+Niger,Niger,NER,Africa
+Nigeria,Nigeria,NGA,Africa
+Niue,Niue,NIU,Oceania
+Norfolk Island,Norfolk Island,NFK,Oceania
+North Carolina,United States,USA,America
+North Dakota,United States,USA,America
+North Korea,North Korea,PRK,Asia
+North Macedonia,North Macedonia,MKD,Europe
+Northern Mariana Islands,United States,USA,America
+Norway,Norway,NOR,Europe
+OH,United States,USA,America
+OK,United States,USA,America
+OR,United States,USA,America
+Ohio,United States,USA,America
+Oklahoma,United States,USA,America
+Oman,Oman,OMN,Asia
+Oregon,United States,USA,America
+PA,United States,USA,America
+PR,United States,USA,America
+Pakistan,Pakistan,PAK,Asia
+Palau,Palau,PLW,Oceania
+Palestine,Palestine,PSE,Asia
+Panama,Panama,PAN,America
+Papua New Guinea,Papua New Guinea,PNG,Oceania
+Paraguay,Paraguay,PRY,America
+Pennsylvania,United States,USA,America
+Peru,Peru,PER,America
+Philippines,Philippines,PHL,Asia
+Pitcairn,Pitcairn,PCN,Oceania
+Poland,Poland,POL,Europe
+Portugal,Portugal,PRT,Europe
+Puerto Rico,United States,USA,America
+Qatar,Qatar,QAT,Asia
+RI,United States,USA,America
+Reunion,Reunion,REU,Africa
+Rhode Island,United States,USA,America
+Romania,Romania,ROU,Europe
+Russia,Russia,RUS,Europe
+Rwanda,Rwanda,RWA,Africa
+SC,United States,USA,America
+SD,United States,USA,America
+Saint-Martin,Saint-Martin,MAF,America
+Samoa,Samoa,WSM,Oceania
+San Marino,San Marino,SMR,Europe
+Sao Tome and Principe,Sao Tome and Principe,STP,Africa
+Saudi Arabia,Saudi Arabia,SAU,Asia
+Senegal,Senegal,SEN,Africa
+Serbia,Serbia,SRB,Europe
+Seychelles,Seychelles,SYC,Africa
+Sierra Leone,Sierra Leone,SLE,Africa
+Singapore,Singapore,SGP,Asia
+Sint Maarten,Sint Maarten,SXM,America
+Slovakia,Slovakia,SVK,Europe
+Slovenia,Slovenia,SVN,Europe
+Solomon Islands,Solomon Islands,SLB,Oceania
+Somalia,Somalia,SOM,Africa
+South Africa,South Africa,ZAF,Africa
+South Carolina,United States,USA,America
+South Dakota,United States,USA,America
+South Georgia and South Sandwich Is.,South Georgia and South Sandwich Is.,SGS,Antarctica
+South Korea,South Korea,KOR,Asia
+South Sudan,South Sudan,SSD,Africa
+Spain,Spain,ESP,Europe
+Sri Lanka,Sri Lanka,LKA,Asia
+St. Barths,St. Barths,BLM,America
+St. Helena,St. Helena,SHN,Africa
+St. Kitts and Nevis,St. Kitts and Nevis,KNA,America
+St. Lucia,St. Lucia,LCA,America
+St. Pierre and Miquelon,St. Pierre and Miquelon,SPM,America
+St. Vincent and the Grenadines,St. Vincent and the Grenadines,VCT,America
+Sudan,Sudan,SDN,Africa
+Suriname,Suriname,SUR,America
+Svalbard and Jan Mayen Islands,Svalbard and Jan Mayen Islands,SJM,Europe
+Sweden,Sweden,SWE,Europe
+Switzerland,Switzerland,CHE,Europe
+Syria,Syria,SYR,Asia
+TN,United States,USA,America
+TX,United States,USA,America
+Taiwan,Taiwan,TWN,Asia
+Tajikistan,Tajikistan,TJK,Asia
+Tanzania,Tanzania,TZA,Africa
+Tennessee,United States,USA,America
+Texas,United States,USA,America
+Thailand,Thailand,THA,Asia
+Timor-Leste,Timor-Leste,TLS,Asia
+Togo,Togo,TGO,Africa
+Tokelau,Tokelau,TKL,Oceania
+Tonga,Tonga,TON,Oceania
+Trinidad and Tobago,Trinidad and Tobago,TTO,America
+Tunisia,Tunisia,TUN,Africa
+Turkey,Türkiye,TUR,Asia
+Turkmenistan,Turkmenistan,TKM,Asia
+Turks and Caicos Islands,Turks and Caicos Islands,TCA,America
+Tuvalu,Tuvalu,TUV,Oceania
+Türkiye,Türkiye,TUR,Asia
+UK,United Kingdom,GBR,Europe
+UM,United States,USA,America
+USA,United States,USA,America
+UT,United States,USA,America
+Uganda,Uganda,UGA,Africa
+Ukraine,Ukraine,UKR,Europe
+United Arab Emirates,United Arab Emirates,ARE,Asia
+United Kingdom,United Kingdom,GBR,Europe
+United States,United States,USA,America
+United States Minor Outlying Islands,United States,USA,America
+United States Virgin Islands,United States Virgin Islands,VIR,America
+Uruguay,Uruguay,URY,America
+Utah,United States,USA,America
+Uzbekistan,Uzbekistan,UZB,Asia
+VA,United States,USA,America
+VI,United States,USA,America
+VT,United States,USA,America
+Vanuatu,Vanuatu,VUT,Oceania
+Vatican,Vatican,VAT,Europe
+Venezuela,Venezuela,VEN,America
+Vermont,United States,USA,America
+Vietnam,Vietnam,VNM,Asia
+"Virgin Islands, U.S.",United States,USA,America
+Virginia,United States,USA,America
+WA,United States,USA,America
+WI,United States,USA,America
+WV,United States,USA,America
+WY,United States,USA,America
+Wallis and Futuna,Wallis and Futuna Islands,WLF,Oceania
+Wallis and Futuna Islands,Wallis and Futuna Islands,WLF,Oceania
+Washington,United States,USA,America
+West Virginia,United States,USA,America
+Western Sahara,Western Sahara,ESH,Africa
+Wisconsin,United States,USA,America
+Wyoming,United States,USA,America
+Yemen,Yemen,YEM,Asia
+Zambia,Zambia,ZMB,Africa
+Zimbabwe,Zimbabwe,ZWE,Africa
