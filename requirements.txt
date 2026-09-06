@@ -11,3 +11,4 @@ python-dotenv==1.0.1
 # Only needed to regenerate the region seed, not at runtime
 country_converter==1.2
 pycountry==24.6.1
+altair==5.4.1
