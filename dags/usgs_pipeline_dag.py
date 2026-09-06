@@ -3,15 +3,18 @@ Operational pipeline for the USGS earthquake catalog.
 
 Runs hourly and covers the whole flow:
 
-    ingest -> silver -> gold -> notify
+    wait for backfill -> close gap -> ingest -> silver -> gold
+    -> snapshot -> notify
 
 The ingest window looks back two days rather than one hour. USGS revises
 events after review, sometimes hours later, and a wider window picks up
 those corrections instead of leaving the first automatic estimate in
 place forever.
 
-This DAG assumes the historical backfill has already been run. It only
-keeps the recent end of the catalog current.
+The region seed is not loaded here. It is owned by the
+worldbank_population DAG, which regenerates the CSV and seeds it
+monthly, since its contents only change when country_converter or
+pycountry are updated.
 """
 
 from datetime import datetime, timedelta
@@ -19,8 +22,13 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
+from airflow.sensors.python import PythonSensor
 
-from load_to_bronze import load_range_to_bronze
+from load_to_bronze import (
+    backfill_has_reached_start,
+    close_ingestion_gap,
+    load_range_to_bronze,
+)
 from telegram_notifier import send_new_earthquake_alerts
 
 DBT_PROJECT_DIR = "/opt/airflow/dbt_project"
@@ -54,6 +62,38 @@ with DAG(
     tags=["usgs", "medallion"],
 ) as dag:
 
+    wait_for_backfill = PythonSensor(
+        task_id="wait_for_backfill",
+        python_callable=backfill_has_reached_start,
+        poke_interval=300,
+        timeout=60 * 60 * 6,
+        mode="reschedule",
+        doc_md="""
+        Waits until bronze holds data back to 2000-01-01 before the
+        first real ingest runs. usgs_backfill works through 26 years on
+        its own monthly schedule, and this DAG must not build silver or
+        gold from a half loaded bronze.
+
+        Checks bronze directly rather than sensing a backfill DagRun,
+        since the two DAGs have no comparable execution date. Passes
+        immediately once backfill has caught up, and stays a cheap
+        no-op on every run after that. mode=reschedule releases the
+        worker slot between checks instead of holding it while waiting.
+        """,
+    )
+
+    close_gap = PythonOperator(
+        task_id="close_ingestion_gap",
+        python_callable=close_ingestion_gap,
+        doc_md="""
+        Checks the latest _source_date already in bronze against today.
+        If there is a gap, because this DAG was paused or because
+        backfill finished on an earlier day than this DAG was enabled,
+        fetches the missing days in chunks before the normal hourly
+        ingest runs. No-op when there is no gap.
+        """,
+    )
+
     ingest_to_bronze = PythonOperator(
         task_id="ingest_to_bronze",
         python_callable=load_recent_events,
@@ -85,6 +125,17 @@ with DAG(
         """,
     )
 
+    snapshot_earthquakes = BashOperator(
+        task_id="snapshot_earthquakes",
+        bash_command=f"cd {DBT_PROJECT_DIR} && dbt snapshot --target dev",
+        doc_md="""
+        Records the current version of every changed event into
+        earthquake_snapshot, keeping full revision history as SCD type
+        2. Runs after silver is rebuilt, since the snapshot reads from
+        silver_usgs_cleaned.
+        """,
+    )
+
     notify_telegram = PythonOperator(
         task_id="notify_telegram",
         python_callable=send_new_earthquake_alerts,
@@ -97,4 +148,12 @@ with DAG(
         """,
     )
 
-    ingest_to_bronze >> build_silver >> build_gold >> notify_telegram
+    (
+        wait_for_backfill
+        >> close_gap
+        >> ingest_to_bronze
+        >> build_silver
+        >> build_gold
+        >> snapshot_earthquakes
+        >> notify_telegram
+    )
