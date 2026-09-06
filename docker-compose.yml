@@ -1,5 +1,4 @@
 services:
-
   postgres:
     image: postgres:15
     environment:
@@ -80,6 +79,7 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - ./src:/opt/airflow/src
+      - ./scripts:/opt/airflow/scripts
       - ./dbt_project:/opt/airflow/dbt_project
       - ./sql:/opt/airflow/sql:ro
       - ./credentials:/opt/airflow/credentials:ro
@@ -101,7 +101,7 @@ services:
     volumes:
       - ./app:/app/dashboard
       - ./credentials:/app/credentials:ro
-    command: ["streamlit", "run", "dashboard/dashboard.py", "--server.address=0.0.0.0"]
+    command: ["streamlit", "run", "dashboard/main.py", "--server.address=0.0.0.0"]
     restart: unless-stopped
 
 volumes:

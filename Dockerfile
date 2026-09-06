@@ -13,7 +13,9 @@ USER airflow
 RUN pip install --no-cache-dir \
     dbt-core==1.8.7 \
     dbt-bigquery==1.8.3 \
-    requests==2.32.3
+    requests==2.32.3 \
+    country_converter==1.2 \
+    pycountry==24.6.1
 
 
 # ----------------------------------------------------------------
