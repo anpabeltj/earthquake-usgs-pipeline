@@ -16,7 +16,7 @@ twice.
 import logging
 import os
 
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import requests
 from google.cloud import bigquery
 
@@ -136,7 +136,11 @@ def build_message(row):
     if row.country:
         lines.append(f"Country: {row.country}")
 
-    lines.append(f"Occurred: {row.event_time:%d %b %Y, %H:%M} UTC ({format_delay(row.event_time)})")
+    local_time = row.event_time.astimezone(timezone(timedelta(hours=7)))
+    lines.append(
+        f"Occurred: {local_time:%d %b %Y, %H:%M} WIB "
+        f"({row.event_time:%H:%M} UTC) — {format_delay(row.event_time)}"
+    )
 
     if row.felt_reports:
         lines.append(f"Felt reports: {row.felt_reports}")
