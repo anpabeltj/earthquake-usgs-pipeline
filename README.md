@@ -183,9 +183,9 @@ Below M2.5, almost all recorded events come from US regional networks — `ci`, 
 
 ## ✅ Data Quality Testing
 
-84 dbt tests: not-null, unique, relationships between the fact table and every dimension, accepted values on categorical columns, and range tests from `dbt_expectations` on magnitude, latitude and longitude. Source freshness is checked against `_ingested_at`.
+85 dbt tests: not-null, unique, relationships between the fact table and every dimension, accepted values on categorical columns, and range tests from dbt_expectations on magnitude, latitude and longitude.
 
-Plus one custom test, `assert_no_ingestion_gaps`, written after the August gap. Generic tests validate the rows that exist; this one validates that no day is missing.
+Plus two custom tests, both written after the August gap. assert_no_bronze_gaps catches a missing day at ingest; assert_no_ingestion_gaps catches one after transformation. Having both separates the two cases: if bronze passes and gold fails, the rows arrived but something downstream dropped them.
 
 ## ⚠️ Known Limitations
 
