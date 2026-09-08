@@ -112,9 +112,6 @@ select
     impact.eq_magnitude,
     impact.eq_depth,
     impact.intensity,
-    -- Bands for the exploration section. Computed here rather than in
-    -- the dashboard so the thresholds match the ones already applied to
-    -- the USGS path, and cannot drift apart later.
     {{ categorize_magnitude('impact.eq_magnitude') }} as magnitude_category,
     {{ categorize_depth('impact.eq_depth') }} as depth_category,
     cast(floor(impact.year / 10) * 10 as int64) as decade,

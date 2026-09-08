@@ -22,9 +22,6 @@ categorized as (
 
         {{ categorize_depth('depth_km') }} as depth_category,
 
-        -- PAGER publishes a level only for events it assesses. Mapping
-        -- the absence to "none" keeps the dimension free of nulls while
-        -- still saying plainly that no assessment exists.
         coalesce(alert, 'none') as alert_level
 
     from cleaned

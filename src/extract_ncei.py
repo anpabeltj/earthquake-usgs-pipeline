@@ -1,25 +1,7 @@
 """
 Fetch significant earthquake records from the NCEI hazard service.
 
-Where USGS records every event above the magnitude threshold, NCEI
-holds only the ones that did damage: a death, roughly a million dollars
-of damage, magnitude 7.5 and up, MMI X and up, or a tsunami. About
-1,472 events fall in the 2000 to present window, against 186 thousand
-in the USGS catalog. That narrowness is the point of the source: USGS
-answers where earthquakes happen, NCEI answers what they cost.
 
-The API paginates at 200 records per page and reports totalPages in the
-response, so the loop below follows that rather than guessing.
-
-Field names arrive in camelCase and are mapped to the snake_case column
-names used everywhere else in this project. Everything else is left as
-sent: the split date parts are assembled into a timestamp in silver,
-not here, so a malformed date fails in a model rather than rejecting
-the whole load job.
-
-Cite as: National Geophysical Data Center / World Data Service
-(NGDC/WDS): NCEI/WDS Global Significant Earthquake Database. NOAA
-National Centers for Environmental Information. doi:10.7289/V5TD9V7K
 """
 
 import logging

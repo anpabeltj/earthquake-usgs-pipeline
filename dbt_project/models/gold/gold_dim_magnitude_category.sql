@@ -1,8 +1,4 @@
-/*
-    Magnitude bands, listed explicitly so every band exists as a filter
-    option even before an earthquake of that size has been recorded.
-    Values match the case expression in silver_usgs_category.
-*/
+
 
 with categories as (
 

@@ -7,9 +7,6 @@ a separate source with its own table and its own schedule: NCEI revises
 death tolls and damage figures as reports come in, but nothing like
 hourly.
 
-The whole series is refetched on every run. At 1,472 rows that costs
-almost nothing, and it is the only way to pick up revisions, since the
-API gives no way to ask what changed.
 """
 
 import logging

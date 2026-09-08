@@ -38,14 +38,9 @@ grouped as (
         lower(trim(coalesce(nearest_place, ''))) as nearest_place_key,
         lower(trim(coalesce(region_raw, ''))) as region_key,
 
-        -- Any one spelling will do for display, but it has to be chosen
-        -- the same way on every run, so max rather than an arbitrary pick.
         max(nearest_place) as nearest_place,
         max(region_raw) as region,
 
-        -- All three come from the seed, which is matched case
-        -- insensitively, so every row in a group already carries the
-        -- same value.
         max(country) as country,
         max(iso3) as iso3,
         max(continent) as continent
