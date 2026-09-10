@@ -9,7 +9,7 @@ returns a DataFrame and knows nothing about how it will be drawn.
 import pandas as pd
 import streamlit as st
 from google.cloud import bigquery
-
+from google.oauth2 import service_account
 
 
 from config import (
@@ -26,7 +26,12 @@ from config import (
 
 @st.cache_resource
 def get_client():
-    """One BigQuery client per session, reused across reruns."""
+    if "gcp_service_account" in st.secrets:
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["gcp_service_account"]
+        )
+        return bigquery.Client(credentials=credentials, project=PROJECT_ID)
+
     return bigquery.Client(project=PROJECT_ID)
 
 

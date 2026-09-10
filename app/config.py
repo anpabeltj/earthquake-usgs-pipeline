@@ -4,8 +4,6 @@ import os
 
 import streamlit as st
 
-# Streamlit Cloud has no .env file, so configuration comes from secrets
-# there and from environment variables when running in Docker.
 PROJECT_ID = st.secrets.get("GCP_PROJECT_ID", os.getenv("GCP_PROJECT_ID"))
 GOLD_DATASET = st.secrets.get("BQ_GOLD_DATASET", os.getenv("BQ_GOLD_DATASET", "gold"))
 
