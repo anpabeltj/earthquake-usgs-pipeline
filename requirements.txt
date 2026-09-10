@@ -1,6 +1,7 @@
 # Dashboard container
 streamlit==1.39.0
 pandas==2.2.3
+altair==5.4.1
 google-cloud-bigquery==3.26.0
 db-dtypes==1.3.0
 
